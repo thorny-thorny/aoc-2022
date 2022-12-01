@@ -26,7 +26,7 @@ fun main() {
 
 // Emits sums of groups of Int separated by nulls
 fun Sequence<Int?>.sumIntGroups(): Sequence<Int> {
-	return sequence {
+    return sequence {
         var acc: Int? = null
         val iterator = iterator()
         while (iterator.hasNext()) {
@@ -43,7 +43,7 @@ fun Sequence<Int?>.sumIntGroups(): Sequence<Int> {
         }
         
         if (acc != null) {
-		    yield(acc)
+            yield(acc)
         }
     }
 }

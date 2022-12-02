@@ -1,5 +1,5 @@
 fun main() {
-    fun decodeLine(line: String) = (line[0] - 'A' + 1) to (line[2] - 'X' + 1)
+    fun decodeLine(line: String) = (line.first() - 'A' + 1) to (line.last() - 'X' + 1)
 
     fun roundScore(opponent: Int, me: Int) = me + ((4 + me - opponent) % 3) * 3
 

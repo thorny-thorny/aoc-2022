@@ -1,18 +1,20 @@
+import java.util.PriorityQueue
+
 fun main() {
     fun part1(input: List<String>): Int {
         return input
             .asSequence()
-            .map { it.toIntOrNull() }
-            .sumIntGroups()
+            .map(String::toIntOrNull)
+            .sumGroups()
             .maxOrNull() ?: throw Exception("There's no food D:")
     }
 
     fun part2(input: List<String>): Int {
         return input
             .asSequence()
-            .map { it.toIntOrNull() }
-            .sumIntGroups()
-            .topInts(3)
+            .map(String::toIntOrNull)
+            .sumGroups()
+            .top(3)
             .sum()
     }
 
@@ -25,39 +27,33 @@ fun main() {
 }
 
 // Emits sums of groups of Int separated by nulls
-fun Sequence<Int?>.sumIntGroups(): Sequence<Int> {
-    return sequence {
-        var acc: Int? = null
-        val iterator = iterator()
-        while (iterator.hasNext()) {
-            val next = iterator.next()
-            when (next) {
-                null -> {
-                    if (acc != null) {
-                        yield(acc)
-                        acc = null
-                    }
-                }
-                else -> acc = (acc ?: 0) + next
+fun Sequence<Int?>.sumGroups() = sequence {
+    var acc: Int? = null
+    val iterator = iterator()
+    while (iterator.hasNext()) {
+        when (val next = iterator.next()) {
+            null -> {
+                acc?.let { yield(it) }
+                acc = null
             }
-        }
-        
-        if (acc != null) {
-            yield(acc)
+            else -> acc = (acc ?: 0) + next
         }
     }
+
+    acc?.let { yield(it) }
 }
 
 // Returns top n maximum Ints in a sequence
-fun Sequence<Int>.topInts(n: Int): List<Int> {
-    var topInts = MutableList(n, { 0 })
+fun Sequence<Int>.top(n: Int): List<Int> {
+    val top = PriorityQueue<Int>(n)
     for (value in this) {
-        if (value > topInts.last()) {
-            topInts.add(value)
-            topInts.sortDescending()
-            topInts.removeLast()
+        if (top.size < n || value > top.peek()) {
+            top.add(value)
+            if (top.size > n) {
+                top.poll()
+            }
         }
     }
 
-    return topInts
+    return top.toList()
 }

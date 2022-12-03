@@ -1,5 +1,7 @@
 # aoc-2022
 
+Me trying to find a balance between performance, memory consumption, code length, readability and reusability 🥲
+
 Welcome to the Advent of Code[^aoc] Kotlin project created by [thorny-thorny][github] using the [Advent of Code Kotlin Template][template] delivered by JetBrains.
 
 In this repository, thorny-thorny is about to provide solutions for the puzzles using [Kotlin][kotlin] language.

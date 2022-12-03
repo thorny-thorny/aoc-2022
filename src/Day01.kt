@@ -31,12 +31,12 @@ fun Sequence<Int?>.sumGroups() = sequence {
     var acc: Int? = null
     val iterator = iterator()
     while (iterator.hasNext()) {
-        when (val next = iterator.next()) {
+        acc = when (val next = iterator.next()) {
             null -> {
                 acc?.let { yield(it) }
-                acc = null
+                null
             }
-            else -> acc = (acc ?: 0) + next
+            else -> (acc ?: 0) + next
         }
     }
 

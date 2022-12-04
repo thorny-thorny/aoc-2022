@@ -54,7 +54,7 @@ fun main() {
             .chunked(3)
             .map { sacks ->
                 val flags = PriorityFlags.allRaised()
-                (0 until sacks.lastIndex).forEach {index ->
+                (0 until sacks.lastIndex).forEach { index ->
                     flags *= PriorityFlags().apply {
                         sacks[index].forEach { set(it) }
                     }

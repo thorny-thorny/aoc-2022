@@ -19,7 +19,7 @@ fun main() {
     fun part2(input: List<String>): Int {
         return input.count {
             val (first, second) = decodeLine(it)
-            first.first in second || first.last in second || second.first in first || second.last in first
+            first overlaps second
         }
     }
 
@@ -32,4 +32,6 @@ fun main() {
     println(part2(input))
 }
 
-operator fun IntRange.contains(other: IntRange) = this.first <= other.first && this.last >= other.last
+operator fun IntRange.contains(other: IntRange) = first <= other.first && last >= other.last
+
+infix fun IntRange.overlaps(other: IntRange) = first <= other.last && last >= other.first

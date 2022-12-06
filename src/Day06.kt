@@ -3,7 +3,7 @@ fun main() {
         val marker = buffer.substring(0 until markerLength).toMutableList()
         return 1 + ((markerLength - 1)..buffer.lastIndex).first {
             marker[it % markerLength] = buffer[it]
-            marker.distinct().size == markerLength
+            !marker.hasDuplicates()
         }
     }
 
@@ -22,4 +22,15 @@ fun main() {
     val input = readInput("Day06")
     println(part1(input))
     println(part2(input))
+}
+
+fun Iterable<Char>.hasDuplicates(): Boolean {
+    val uniqueChars = mutableSetOf<Char>()
+    this.forEach {
+        if (!uniqueChars.add(it)) {
+            return true
+        }
+    }
+
+    return false
 }

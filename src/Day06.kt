@@ -26,7 +26,7 @@ fun main() {
 
 fun Iterable<Char>.hasDuplicates(): Boolean {
     val uniqueChars = mutableSetOf<Char>()
-    this.forEach {
+    forEach {
         if (!uniqueChars.add(it)) {
             return true
         }
